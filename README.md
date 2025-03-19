@@ -1,16 +1,20 @@
-# z_flix
+# 🎬  Z -Flix
 
-A new Flutter project.
+A sleek and user-friendly movie app built using **Flutter** and **TMDB APIs**. It allows users to browse and explore movies while also providing important **movie disclaimers**, **cast details**, and **ratings**.
 
-## Getting Started
+✅ **Top Rated**  
+✅ **Popular**  
+✅ **Trending**  
+✅ **Hollywood & Bollywood**  
+✅ **Movie Disclaimers & Details**  
+✅ **Cast & Ratings Information**  
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
+## 🚀 Features
+- **GetX** for efficient state management
+- **Search Functionality** for quick access to movies
+- **Detailed Movie Information** including disclaimers, cast, and ratings
+- **Smooth UI & Performance**
+- **Real-time Data Fetching** from TMDB API
+- **Dotenv for Securing API Keys**
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
