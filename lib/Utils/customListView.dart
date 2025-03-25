@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:z_flix/Model/Movie.dart';
 
-import 'Views/detailMovie.dart';
-
+import '../Views/movie_detail_screen.dart';
 class CustomListView extends StatelessWidget {
   List<Results> resultType;
 
@@ -26,7 +25,7 @@ class CustomListView extends StatelessWidget {
                   context,
                   MaterialPageRoute(
                     builder: (context) =>
-                        MovieDetailScreen(movieInfo: resultType[index]),
+                        MovieDetail(movieInfo: resultType[index]),
                   ),
                 );
               },

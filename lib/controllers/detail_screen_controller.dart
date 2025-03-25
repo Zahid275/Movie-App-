@@ -1,30 +1,33 @@
-import 'dart:convert';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
-import 'package:http/http.dart' as http;
 
 class DetailController extends GetxController {
-  RxList<Map> castInfo = <Map<String, dynamic>>[].obs;
-  String baseUrl = "https://api.themoviedb.org/3/";
-  String? apiKey = dotenv.env['API_KEY'];
-  getCast(id) async {
-    final uri = Uri.parse(baseUrl+ "movie/$id/credits");
 
-    final response = await http.get(uri, headers: {
-      "Authorization": "Bearer $apiKey",
-      "Content-Type": "application/json"
-    });
 
-    if (response.statusCode == 200) {
-      castInfo.clear();
-      final body = jsonDecode(response.body);
-      for (int i = 0; i < body["cast"].length; i++) {
-        castInfo.add(body["cast"][i]);
-      }
-      print(castInfo);
-      update();
-    } else {
-      print("Failed to fetch cast: ${response.statusCode}");
-    }
+  Map<int, String> genres = {
+    28: "Action",
+    12: "Adventure",
+    16: "Animation",
+    35: "Comedy",
+    80: "Crime",
+    99: "Documentary",
+    18: "Drama",
+    10751: "Family",
+    14: "Fantasy",
+    36: "History",
+    27: "Horror",
+    10402: "Music",
+    9648: "Mystery",
+    10749: "Romance",
+    878: "Science Fiction",
+    10770: "TV Movie",
+    53: "Thriller",
+    10752: "War",
+    37: "Western",
+  };
+
+  List<String> getGenre(List<int>? genreIds) {
+    if (genreIds == null) return [];
+
+    return genreIds.map((id) => genres[id] ?? "Unknown").toList();
   }
 }

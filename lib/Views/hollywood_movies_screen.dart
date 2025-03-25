@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:z_flix/Model/Movie.dart';
-import 'package:z_flix/controllers/bollywood_controller.dart';
-import 'package:z_flix/Views/detailMovie.dart';
+import 'package:z_flix/controllers/hollywood_controller.dart';
+import 'package:z_flix/Views/movie_detail_screen.dart';
 
-class Bollywood extends StatelessWidget {
-  final controller = Get.put(BollywoodController());
+import '../Utils/customDrawer.dart';
 
-  Bollywood({super.key});
+class Hollywood extends StatelessWidget {
+  final controller = Get.put(HollywoodController());
+
+  Hollywood({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -17,19 +19,22 @@ class Bollywood extends StatelessWidget {
     int crossAxisCount = screenWidth > 600 ? 3 : 2;
 
     return Scaffold(
+      drawer:  CustomDrawer(),
+
       backgroundColor: Colors.black87,
       appBar: AppBar(
           backgroundColor: Colors.black87,
-          title: const Text(
-            "Bollywood Movies",
+          title:  Text(
+            "Hollywood Movies",
             style: TextStyle(
-                color: Colors.yellow,
+                color: Theme.of(context).primaryColor,
                 fontSize: 25,
                 fontWeight: FontWeight.w700),
           )),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+          padding: EdgeInsets.symmetric(
+              horizontal: screenWidth * 0.03, vertical: screenHeight * 0.01),
           child: Column(
             children: [
               TextField(
@@ -38,7 +43,6 @@ class Bollywood extends StatelessWidget {
                   if (value.isEmpty ||
                       controller.searchQuery.text.toString().isEmpty) {
                     controller.isSearching.value = false;
-                    controller.update();
                   } else {
                     controller.searchMovies(value.toString());
                   }
@@ -49,26 +53,29 @@ class Bollywood extends StatelessWidget {
                   hintText: "Search...",
                   prefixIcon: const Icon(Icons.search),
                   border: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.transparent),
+                      borderSide: const BorderSide(color: Colors.transparent),
                       borderRadius: BorderRadius.circular(screenWidth * 0.02)),
                   enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.transparent),
+                      borderSide: const BorderSide(color: Colors.transparent),
                       borderRadius: BorderRadius.circular(screenWidth * 0.02)),
                   focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.transparent),
+                      borderSide: const BorderSide(color: Colors.transparent),
                       borderRadius: BorderRadius.circular(screenWidth * 0.02)),
                 ),
               ),
-              GetBuilder<BollywoodController>(builder: (controller) {
-                if (controller.bollywoodMovies == null ||
-                    controller.bollywoodMovies!.results == null ||
-                    controller.bollywoodMovies!.results!.isEmpty) {
+              SizedBox(
+                height: screenHeight * 0.04,
+              ),
+              GetBuilder<HollywoodController>(builder: (controller) {
+                if (controller.hollywoodMovies == null ||
+                    controller.hollywoodMovies!.results == null ||
+                    controller.hollywoodMovies!.results!.isEmpty) {
                   return SizedBox(
                     height: screenHeight,
                     width: screenWidth,
-                    child: const Center(
+                    child:  Center(
                       child: CircularProgressIndicator(
-                        color: Colors.yellow,
+                        color: Theme.of(context).primaryColor,
                       ),
                     ),
                   );
@@ -89,15 +96,15 @@ class Bollywood extends StatelessWidget {
                               mainAxisSpacing: 8,
                             ),
                             itemCount:
-                                controller.bollywoodMovies!.results!.length,
+                                controller.hollywoodMovies!.results!.length,
                             itemBuilder: (context, index) {
                               List<Results>? hm =
-                                  controller.bollywoodMovies!.results;
+                                  controller.hollywoodMovies!.results;
 
                               if (hm![index].posterPath != null) {
                                 return InkWell(
                                   onTap: () {
-                                    Get.to(MovieDetailScreen(
+                                    Get.to(MovieDetail(
                                       movieInfo: hm[index],
                                     ));
                                   },
@@ -110,35 +117,30 @@ class Bollywood extends StatelessWidget {
                               } else {
                                 return InkWell(
                                     onTap: () {
-                                      Get.to(MovieDetailScreen(
+                                      Get.to(MovieDetail(
                                         movieInfo: hm[index],
                                       ));
                                     },
-                                    child: Container(
-                                      child: Center(
-                                        child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            Center(
-                                              child: Text(
-                                                "${controller.bollywoodMovies!.results![index].title}",
-                                                style: TextStyle(
-                                                    color: Colors.yellow,
-                                                    fontSize: 18,
-                                                    fontWeight:
-                                                        FontWeight.w700),
-                                              ),
-                                            ),
-                                            Text(
-                                              "NO IMAGE IN DB",
-                                              style: TextStyle(
-                                                  color: Colors.white,
-                                                  fontSize: 12),
-                                            ),
-                                          ],
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Center(
+                                          child: Text(
+                                            "${controller.hollywoodMovies!.results![index].title}",
+                                            style: TextStyle(
+                                                color: Theme.of(context).primaryColor,
+                                                fontSize: 18,
+                                                fontWeight: FontWeight.w700),
+                                          ),
                                         ),
-                                      ),
+                                        const Text(
+                                          "NO IMAGE IN DB",
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 12),
+                                        ),
+                                      ],
                                     ));
                               }
                             })
@@ -164,12 +166,14 @@ class Bollywood extends StatelessWidget {
                                   controller
                                       .searchedMovies!.results!.isNotEmpty &&
                                   controller.searchedMovies != null) {
-                                return Container(
-                                  decoration: BoxDecoration(
-                                      image: DecorationImage(
-                                          image: NetworkImage(
-                                              "https://image.tmdb.org/t/p/w500/"
-                                              "${controller.searchedMovies!.results![index].posterPath}"))),
+                                return Card(
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                        image: DecorationImage(
+                                            image: NetworkImage(
+                                                "https://image.tmdb.org/t/p/w500/"
+                                                "${controller.searchedMovies!.results![index].posterPath}"))),
+                                  ),
                                 );
                               } else {
                                 return null;
@@ -187,13 +191,13 @@ class Bollywood extends StatelessWidget {
                                   onPressed: () {
                                     if (controller.pageNo.value > 1) {
                                       controller.pageNo.value--;
-                                      controller.fetchBollywood();
+                                      controller.fetchHollywood();
                                     }
                                   }),
                               Text(
                                 "${controller.pageNo.value}",
-                                style: const TextStyle(
-                                    color: Colors.yellow, fontSize: 23),
+                                style:  TextStyle(
+                                    color: Theme.of(context).primaryColor, fontSize: 23),
                               ),
                               IconButton(
                                 icon: const Icon(
@@ -202,12 +206,12 @@ class Bollywood extends StatelessWidget {
                                 ),
                                 onPressed: () {
                                   controller.pageNo.value++;
-                                  controller.fetchBollywood();
+                                  controller.fetchHollywood();
                                 },
                               )
                             ],
                           )
-                        : SizedBox()
+                        : const SizedBox()
                   ]);
                 }
               }),

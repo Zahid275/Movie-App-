@@ -5,10 +5,7 @@ import 'package:z_flix/Services/api_Services.dart';
 
 class HomeController extends GetxController {
   final String baseUrl = "https://api.themoviedb.org/3/";
-  final searchQuery = TextEditingController();
-  final ApiServices apiService = ApiServices();
-
-
+  Rx<TextEditingController> searchQuery = TextEditingController().obs;
 
   Rx<int> pageNo = 1.obs;
   Rx<bool> isLoading = true.obs;
@@ -29,20 +26,20 @@ class HomeController extends GetxController {
       // Fetching all APIs in parallel
       var results = await Future.wait([
         //For TendinG
-        apiService.fetchData(endPoint: "/3/trending/movie/week"),
+        ApiServices.fetchData(endPoint: "/3/trending/movie/week"),
         //for toP Rated
-        apiService.fetchData(endPoint: "/3/movie/top_rated"),
+        ApiServices.fetchData(endPoint: "/3/movie/top_rated"),
         //For Action Movies
-        apiService.fetchData(
+        ApiServices.fetchData(
             endPoint: "/3/discover/movie?with_genres=28&page=1"),
         // For Popular movies
-        apiService.fetchData(
+        ApiServices.fetchData(
             endPoint: "/3/movie/popular?language=en-US&page=1"),
         //foR Horror
-        apiService.fetchData(
+        ApiServices.fetchData(
             endPoint: "/3/discover/movie?with_genres=27&page=1"),
         // For Comedy
-        apiService.fetchData(
+        ApiServices.fetchData(
             endPoint: "/3/discover/movie?with_genres=35&page=1"),
       ]);
 
@@ -59,15 +56,13 @@ class HomeController extends GetxController {
               .toList() ??
           []);
       isLoading(false);
-    } catch(e){
+    } catch (e) {
       isLoading(true);
-
-
     }
   }
 
   Future<void> fetchBySearching(String movieTitle) async {
-    searchedMovies.value = await apiService.fetchData(
+    searchedMovies.value = await ApiServices.fetchData(
         endPoint: "/3/search/movie?query=${movieTitle.trim()}");
     update();
   }

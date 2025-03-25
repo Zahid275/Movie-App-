@@ -42,33 +42,45 @@ dependencies:
   carousel_slider: ^5.0.0
   font_awesome_flutter: ^10.8.0
   flutter_dotenv: ^5.2.1
+  sqflite: ^2.4.1
+  path: ^1.9.0
+  auto_size_text: ^3.0.0
+  firebase_auth: ^5.5.1
+  firebase_core: ^3.12.1
+  cloud_firestore: ^5.6.5
+  flutter_native_splash: ^2.4.4
 
 dev_dependencies:
-  flutter_test:
-    sdk: flutter
-
-  # The "flutter_lints" package below contains a set of recommended lints to
-  # encourage good coding practices. The lint set provided by the package is
-  # activated in the `analysis_options.yaml` file located at the root of your
-  # package. See that file for information about deactivating specific lint
-  # rules and activating additional ones.
   flutter_lints: ^4.0.0
 
-# For information on the generic Dart part of this file, see the
-# following page: https://dart.dev/tools/pub/pubspec
+  flutter_test:
+    sdk: flutter
+  flutter_launcher_icons: ^0.14.3
 
-# The following section is specific to Flutter packages.
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "assets/launcher_icon.png"
+  adaptive_icon_background: "#000000"
+  adaptive_icon_foreground: "assets/launcher_icon.png"
+
+flutter_native_splash:
+  image: assets/logo.png
+  icon_background_color: "#000000"
+  color: "#000000"
+  android: true
+  ios: true
+
+
+
 flutter:
 
-  # The following line ensures that the Material Icons font is
-  # included with your application, so that you can use the icons in
-  # the material Icons class.
   uses-material-design: true
-
   # To add assets to your application, add an assets section, like this:
   assets:
     - .env
-#    - # An image asset can refer to one or more resolution-specific "variants", see
+    - assets/
+  #    - # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
 
   # For details regarding adding assets from package dependencies, see

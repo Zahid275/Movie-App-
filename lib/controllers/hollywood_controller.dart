@@ -7,7 +7,7 @@ import '../Services/api_Services.dart';
 
 class HollywoodController extends GetxController {
   MovieModel? hollywoodMovies;
-  Rx<int> pageNo = 1.obs;
+  Rx<int> pageNo  = 1.obs;
 
   MovieModel? searchedMovies;
   TextEditingController searchQuery = TextEditingController();
@@ -16,11 +16,10 @@ class HollywoodController extends GetxController {
 
 
 
-  ApiServices apiServices = ApiServices();
 
   searchMovies(String keyWord) async {
     isSearching.value = true;
-  searchedMovies = await apiServices.fetchData(
+  searchedMovies = await ApiServices.fetchData(
       endPoint:
       "/3/search/movie?query=${keyWord
           .trim()}&language=en&with_original_language=en&include_adult=false&region=US");
@@ -28,9 +27,8 @@ class HollywoodController extends GetxController {
   }
 
   fetchHollywood() async {
-    hollywoodMovies = await apiServices.fetchData(
-        endPoint:
-            "/3/discover/movie?region=US&with_original_language=en&page=$pageNo");
+    hollywoodMovies = await ApiServices.fetchData(
+        endPoint: "/3/discover/movie?region=US&with_original_language=en&page=$pageNo");
 
     update();
   }

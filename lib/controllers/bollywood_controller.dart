@@ -18,15 +18,14 @@ class BollywoodController extends GetxController {
 
   searchMovies(String keyWord) async {
     isSearching.value = true;
-    searchedMovies = await apiServices.fetchData(
+    searchedMovies = await ApiServices.fetchData(
         endPoint:
             "/3/search/movie?query=${keyWord.trim()}&language=en&with_original_language=hi&include_adult=false&region=IN");
     update();
   }
 
   fetchBollywood() async {
-    ApiServices api = ApiServices();
-    bollywoodMovies = await api.fetchData(
+    bollywoodMovies = await ApiServices.fetchData(
         endPoint:
             "/3/discover/movie?region=IN&with_original_language=hi&page=$pageNo}");
 

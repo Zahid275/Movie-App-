@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "773183307287",
+    "project_id": "z-flix-e6ae1",
+    "storage_bucket": "z-flix-e6ae1.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:773183307287:android:b35b8b3a18c71863332652",
+        "android_client_info": {
+          "package_name": "com.example.z_flix"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA7lp-8LxhLIT0RdZoP7Gnll5DZnV4SPSc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
