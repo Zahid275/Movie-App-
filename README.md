@@ -1,16 +1,20 @@
-# z_flix
+# Movie App
 
-A new Flutter project.
+A Flutter-based movie application that allows users to explore movies, add them to their "Watch Later" list, and search for movies using TMDB APIs. The app is built using the GetX state management library and follows the MVC (Model-View-Controller) design pattern. It also integrates Firebase for authentication and Firestore for storing user data.
 
-## Getting Started
+## Features
 
-This project is a starting point for a Flutter application.
+- **Browse Movies**: Explore a wide range of movies categorized by genre and Movie Industries(Hollywood,Bollywood) by TMDB APIS.
+- **Search Functionality**: Search for movies using the TMDB API.
+- **Watch Later List**: Add movies to your "Watch Later" list using Firestore.
+- **Movie Details**: Get detailed information about movies, including ratings, genres, cast, and more.
+- **User  Authentication**: Secure user authentication using Firebase Authentication.
 
-A few resources to get you started if this is your first Flutter project:
+## Technologies Used
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- Flutter
+- GetX
+- MVC Pattern
+- TMDB APIs
+- Firestore
+- Firebase Authentication
